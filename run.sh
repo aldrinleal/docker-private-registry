@@ -165,15 +165,7 @@ max-requests = 5000
 static-map = /static=/app/static
 module = wsgi:application
 EOF
-
-# redis config
-cat << EOF >> /etc/redis.conf
-daemonize no
-requirepass $CACHE_REDIS_PASSWORD
-maxmemory 2mb
-maxmemory-policy allkeys-lru
-EOF
-
+ 
 # supervisor config
 cat << EOF > /etc/supervisor/supervisor.conf
 [supervisord]
@@ -187,15 +179,6 @@ supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 
 [supervisorctl]
 serverurl=unix:///var/run//supervisor.sock
-
-[program:redis]
-priority=05
-user=root
-command=/usr/bin/redis-server /etc/redis.conf
-directory=/var/lib/redis
-autostart=true
-autorestart=true
-stopsignal=QUIT
 
 [program:registry]
 priority=10
