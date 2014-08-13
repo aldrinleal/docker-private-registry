@@ -12,9 +12,9 @@ run pip install uwsgi
 add run.sh /usr/local/bin/run
 add . /app
 run pip install -r /app/requirements.txt
-env CACHE_REDIS_HOST redis
+env CACHE_REDIS_HOST 127.0.0.1
 env CACHE_REDIS_PORT 6379
-env CACHE_LRU_REDIS_HOST redis
+env CACHE_LRU_REDIS_HOST 127.0.0.1
 env CACHE_LRU_REDIS_PORT 6379
 expose 80
 expose 443
