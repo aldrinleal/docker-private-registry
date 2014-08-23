@@ -7,8 +7,8 @@ CACHE_REDIS_PASSWORD=${REDIS_PASSWORD:-docker}
 CACHE_LRU_REDIS_PASSWORD=${REDIS_PASSWORD:-docker}
 PASSWORD_FILE=${USER_DB:-/etc/registry/registry.users}
 
-export CACHE_REDIS_PASSWORD
-export CACHE_LRU_REDIS_PASSWORD
+unset CACHE_REDIS_PASSWORD=
+unset CACHE_LRU_REDIS_PASSWORD
 
 # nginx config
 cat << EOF > /usr/local/openresty/nginx/conf/registry.conf
@@ -188,6 +188,8 @@ directory=/docker-registry
 autostart=true
 autorestart=true
 stopsignal=QUIT
+stdout_logfile=syslog
+stderr_logfile=syslog
 
 [program:manage]
 priority=20
